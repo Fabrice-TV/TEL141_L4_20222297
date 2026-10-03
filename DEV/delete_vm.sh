@@ -13,7 +13,7 @@ echo "[OK] VM $VM eliminada (VLAN $VLAN, VNC $VNC)"
 
 USERS=0
 for D in $DIR/vms/*.qcow2; do
-  [ -f "$D" ] && qemu-img info "$D" | grep -q "backing file: $BASE" && USERS=$((USERS+1))
+  [ -f "$D" ] && qemu-img info -U "$D" | grep -q "backing file: $BASE" && USERS=$((USERS+1))
 done
 if [ $USERS -eq 0 ] && [ -f $BASE ]; then
   rm -f $BASE; echo "[OK] Imagen base sin deltas: eliminada"
